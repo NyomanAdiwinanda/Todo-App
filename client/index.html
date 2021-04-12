@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fancy ToDo</title>
+
+        <!-- Sweet Alert 2 -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
+
+        <!-- Google Sign In OAuth -->
+        <script
+            src="https://apis.google.com/js/platform.js"
+            async
+            defer
+        ></script>
+        <meta
+            name="google-signin-client_id"
+            content="288168419410-6d526jl2b3a8o5dnoq54gea7v13rk2t9.apps.googleusercontent.com"
+        />
+
+        <!-- JQuery CDN -->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"
+            defer
+        ></script>
+
+        <!-- script.js -->
+        <script src="./script.js" defer></script>
+
+        <!-- Bootstrap core CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+            crossorigin="anonymous"
+        />
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+        </style>
+        <link href="./signin.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <!-- Login -->
+        <main class="form-signin" id="login">
+            <form id="loginform">
+                <h1 class="h3 mb-3 fw-normal" style="text-align: center">
+                    Fancy ToDo App
+                </h1>
+                <h1 class="h3 mb-3 fw-normal">Login</h1>
+                <label for="inputEmail" class="visually">Email address:</label
+                ><br />
+                <input
+                    type="email"
+                    id="loginemail"
+                    class="form-control"
+                    placeholder="Email address"
+                    required
+                    autofocus
+                />
+                <label for="inputPassword" class="visually">Password:</label
+                ><br />
+                <input
+                    type="password"
+                    id="loginpassword"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                />
+                <button class="w-100 btn btn-lg btn-primary" type="submit">
+                    Login
+                </button>
+                <p>
+                    Don't have account?
+                    <a href="#" id="linkregister">Register Here</a>
+                </p>
+            </form>
+            <div
+                class="g-signin2"
+                data-longtitle="true"
+                data-onsuccess="onSignIn"
+            ></div>
+        </main>
+
+        <!-- Register -->
+        <main class="form-signin" id="register">
+            <form id="registerform">
+                <h1 class="h3 mb-3 fw-normal" style="text-align: center">
+                    Fancy ToDo App
+                </h1>
+                <h1 class="h3 mb-3 fw-normal">Register</h1>
+                <label for="inputEmail" class="visually">Email address:</label
+                ><br />
+                <input
+                    type="email"
+                    id="registeremail"
+                    class="form-control"
+                    placeholder="Email address"
+                    required
+                    autofocus
+                />
+                <label for="inputPassword" class="visually">Password:</label
+                ><br />
+                <input
+                    type="password"
+                    id="registerpassword"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                />
+                <label for="inputPassword" class="visually"
+                    >Confirm Password:</label
+                ><br />
+                <input
+                    type="password"
+                    id="confirmregisterpassword"
+                    class="form-control"
+                    placeholder="Confirm Password"
+                    required
+                />
+                <button class="w-100 btn btn-lg btn-primary" type="submit">
+                    Register
+                </button>
+                <p>
+                    Already has an account?
+                    <a href="#" id="linklogin">Login Here</a>
+                </p>
+            </form>
+        </main>
+
+        <!-- Main Page -->
+        <div id="app">
+            <!-- Navbar -->
+            <div id="navbar-area">
+                <nav
+                    class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+                >
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Fancy ToDo</a>
+                        <div
+                            class="collapse navbar-collapse"
+                            id="navbarCollapse"
+                        >
+                            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        aria-current="page"
+                                        href="#"
+                                        >My ToDo</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Project</a>
+                                </li>
+                            </ul>
+                            <button
+                                class="btn btn-outline-success active"
+                                id="logout"
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div id="todo">
+                <!-- My ToDo -->
+                <div class="container">
+                    <form id="add-todo-form">
+                        <label>Title</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            autocomplete="off"
+                            id="new-todo-title"
+                        />
+                        <br />
+                        <label>Description</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Description"
+                            autocomplete="off"
+                            id="new-todo-description"
+                        />
+                        <br />
+                        <label>Status</label>
+                        <br />
+                        <select id="new-todo-status">
+                            <option value="false">Not Finished</option>
+                            <option value="true">Finished</option>
+                        </select>
+                        <br />
+                        <label>Due Date</label>
+                        <br />
+                        <input type="date" id="new-todo-due_date" />
+                        <br />
+                        <br />
+                        <input type="submit" value="Add Todo" />
+                    </form>
+                </div>
+                <div class="fetchTodo"></div>
+                <div class="fetchRandomQuote"></div>
+            </div>
+        </div>
+    </body>
+</html>

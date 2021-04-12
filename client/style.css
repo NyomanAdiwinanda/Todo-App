@@ -1,0 +1,33 @@
+.g-signin2 {
+    padding-left: 100px;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #e6e6fa;
+}
+
+.container {
+    width: 900px;
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.fetchTodo,
+.fetchRandomQuote {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+}
+
+.card,
+.randomQuoteCard {
+    margin-top: 10px;
+    padding: 20px;
+}
+
+.card h1,
+.randomQuoteCard h1 {
+    font-size: 24px;
+}
